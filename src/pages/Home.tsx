@@ -26,16 +26,16 @@ function Home() {
 
     const renderCartContent = () => {
         if (loading) {
-            return <p className={"mx-3"} >Loading...</p>;
+            return <p className={"mx-3"}>Loading...</p>;
         }
         if (error) {
             return <p className={"mx-3 text-red-600"}>{error}</p>;
         }
         if (cartItems.length === 0) {
-            return <p className={"mx-3"} >Your cart is empty.</p>;
+            return <p className={"mx-3"}>Your cart is empty.</p>;
         }
         return (
-            <div className="cart-items flex flex-col items-center space-y-4 mx-3">
+            <div className="cart-items flex flex-col items-center space-y-4 mx-3 overflow-y-auto">
                 {cartItems.map((item) => (
                     <CartItemTile key={item.id} cartItem={item} fetchCartItems={fetchCartItems}/>
                 ))}
@@ -76,7 +76,6 @@ function Home() {
         );
 
         await fetchCartItems();
-
     }
 
     const fetchItems = async () => {
@@ -103,42 +102,47 @@ function Home() {
     }, []);
 
     return (
-        <div>
-            <div className={"flex-row flex justify-between"}>
-                <div>
-                    {loading && <p>Loading...</p>}
-                    {error && <p style={{color: "red"}}>{error}</p>}
-                    {!loading && !error && (
-                        <div className="item-list flex flex-wrap gap-4">
-                            {items.map((item) => (
-                                <ItemTile key={item.id} item={item} fetchCartItems={fetchCartItems}
-                                />
-                            ))}
-                        </div>
-                    )}
-                </div>
-                {/*Cart Section*/}
-                <div className={"border-amber-400 border-2 rounded-xl shadow-md flex flex-col items-center space-y-4 justify-between bg-white"}>
-                    <div className={"flex flex-row justify-between border-amber-400 border-b-2 w-full p-2"}>
-                        <h1 className={"ps-2 text-3xl font-bold text-center"}>
-                            Cart
-                        </h1>
-                        <p className={"text-gray-700 text-sm underline select-none"}
-                           onClick={handleClearCart}
-                        >
-                            Clear
-                        </p>
+        <div className="flex">
+            {/* Main content area - adding right padding to account for fixed cart */}
+            <div className="flex-1 pr-72">
+                {loading && <p>Loading...</p>}
+                {error && <p style={{color: "red"}}>{error}</p>}
+                {!loading && !error && (
+                    <div className="item-list flex flex-wrap gap-4">
+                        {items.map((item) => (
+                            <ItemTile key={item.id} item={item} fetchCartItems={fetchCartItems}/>
+                        ))}
                     </div>
-                    {renderCartContent()}
-                    <button
-                        className={"bg-amber-500 text-white font-semibold px-4 py-2 rounded"}
-                        onClick={openCheckout}
-                    >
-                        Checkout
-                    </button>
-
-                </div>
+                )}
             </div>
+
+            {/* Fixed Cart Section */}
+            <div className="fixed right-4 top-20 w-72 h-[calc(100vh-7rem)] flex flex-col border-2 border-amber-400 rounded-xl shadow-md bg-white">
+                <div className="flex flex-row justify-between border-b-2 border-amber-400 w-full p-2">
+                    <h1 className="ps-2 text-3xl font-bold text-center">
+                        Cart
+                    </h1>
+                    <p className="text-gray-700 text-sm underline select-none cursor-pointer"
+                       onClick={handleClearCart}
+                    >
+                        Clear
+                    </p>
+                </div>
+
+                {/* Scrollable cart items area */}
+                <div className="flex-1 overflow-y-auto my-2">
+                    {renderCartContent()}
+                </div>
+
+                {/* Checkout button (fixed at bottom) */}
+                <button
+                    className="bg-amber-500 text-white font-semibold px-4 py-2 rounded m-2"
+                    onClick={openCheckout}
+                >
+                    Checkout
+                </button>
+            </div>
+
             <CheckoutModal isOpen={isCheckoutOpen} closeModal={closeCheckout} refreshCart={fetchCartItems}/>
         </div>
     );
