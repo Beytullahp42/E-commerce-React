@@ -1,7 +1,6 @@
 /// <reference types="vite/client" />
 interface ImportMetaEnv {
-    readonly REACT_APP_BASE_URL: string
-    // add other environment variables here as needed
+    readonly VITE_BASE_URL: string
 }
 
 interface ImportMeta {
