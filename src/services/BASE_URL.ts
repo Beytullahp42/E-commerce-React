@@ -1,2 +1,2 @@
-export const BASE_URL = "http://localhost:8080";
-export const IMAGE_URL = BASE_URL + "/upload-dir/";
+export const BASE_URL = import.meta.env.REACT_APP_BASE_URL || "http://localhost:8080";
+export const IMAGE_URL = `${BASE_URL}/upload-dir/`;
