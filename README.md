@@ -32,6 +32,15 @@ Backend API repository: https://github.com/Beytullahp42/e-commerce
 
 ---
 
+Preview of the app: https://e-commerce-react-phi-eight.vercel.app/
+
+Admin page: https://e-commerce-react-phi-eight.vercel.app/admin
+
+Note: Since the Spring Boot backend of this app is hosted on a Render free plan, it goes to sleep after periods of inactivity. As a result, the initial boot-up can take up to 50 seconds to 1 minute.
+Additionally, since I don’t have persistent disk storage allocated, uploaded images may be deleted on each redeployment.
+
+---
+
 ## 📸 Screenshots
 
 <img src="Screenshots/Screenshot_25-5-2025_185930_localhost.jpeg" width="600"/>
