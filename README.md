@@ -28,7 +28,7 @@ Features include:
 
 ---
 
-Backend API repository: https://github.com/Beytullahp42/e-commerce
+Backend API repository: https://github.com/Beytullahp42/Mock-E-commerce-SpringBoot
 
 ---
 
